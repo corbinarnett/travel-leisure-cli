@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
-
+puts "hello world"
 #executable file
 require "bundler/setup"
-require "TravelLeisure"
+require "travel_leisure"
 
 TravelLeisure::CLI.new.call
