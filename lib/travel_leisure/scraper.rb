@@ -1,5 +1,5 @@
-module TravelLeisure
-  class Scraper
+class TravelLeisure::Scraper
+  
 
     def get_page
       Nokogiri::HTML(open("https://www.travelandleisure.com/travel-guide"))
@@ -9,5 +9,5 @@ module TravelLeisure
 
   
     
-  end
+  
 end
