@@ -9,7 +9,7 @@ class TravelLeisure::CLI #:: name space
     end
 
     def get_destinations
-      @destinations = TravelLeisure::Destination.all
+      TravelLeisure::Destination.all
     end
       
     def list_destinations_with_index

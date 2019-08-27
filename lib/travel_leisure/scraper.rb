@@ -3,12 +3,13 @@ class TravelLeisure::Scraper
     Nokogiri::HTML(open("https://www.travelandleisure.com/travel-guide"))
   end
 
-  def scrape_cities
-    self.get_page.css("span.grid__item__title")
+  def scrape_destinations
+    self.get_page.css("ul.grid li")
   end
 
-  def scrape_countries
-    self.get_page.css("span.grid__item__cat")
-    binding.pry
+  def make_destinations
+    scrape_destinations.each do |r|
+      TravelLeisure::Destination.self.new_from_index_page(r)
+    end
   end
 end

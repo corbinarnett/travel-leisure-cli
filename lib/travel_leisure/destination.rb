@@ -1,15 +1,23 @@
 class TravelLeisure::Destination
   @@all = []
-  attr_accessor :city, :country
+  attr_accessor :city, :country, :url
 
-  def initialize(city, country)
+  def self.new_from_index_page(r)
+    self.new(
+      r.css("span.grid__item__title").text,
+      r.css("span.grid__item__cat").text,
+      r.css("a").attribute("href").text
+      )
+  end
+
+  def initialize(city=nil,country=nil,url=nil)
     @city = city
     @country = country
+    @url = url
     save
   end
 
   def self.all
-    TravelLeisure::Scraper.create_destinations if @@all.empty?
     @@all
   end
 
