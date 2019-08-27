@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["corbinarnett"]
   spec.email         = ["corbin.c.arnett@gmail.com"]
 
-  spec.summary       = %q{"A ruby gem to access travel and leisure travel guides"}
+  spec.summary       = %q{"A ruby gem to access travel guides in your terminal!"}
   spec.description   = %q{"A ruby gem"}
   spec.homepage      = "https://github.com/corbinarnett/travel-leisure-cli"
   spec.license       = "MIT"
