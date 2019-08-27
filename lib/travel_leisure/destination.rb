@@ -6,7 +6,7 @@ class TravelLeisure::Destination
     self.new(
       r.css("span.grid__item__title").text,
       r.css("span.grid__item__cat").text,
-      r.css("a").attribute("href")
+      "https://www.travelandleisure.com/travel-guide/#{r.css("span.grid__item__title").text.downcase}"
       )
   end
 
@@ -19,7 +19,11 @@ class TravelLeisure::Destination
 
   def self.all
     @@all
-    binding.pry
+    # binding.pry
+  end
+
+  def self.find(id)
+    self.all[id-1]
   end
 
   def doc

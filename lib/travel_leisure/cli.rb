@@ -11,11 +11,29 @@ class TravelLeisure::CLI #:: name space
     end
 
     def start
+      puts ""
+      print_destinations
+
+      puts "\nWhich travel guide would you like to see?"
+
+      input = gets.strip.to_i
+
+      destination = TravelLeisure::Destination.find(input)
+
+      print_destination(destination)
+  
+      
+  
+    end
+
+    def print_destination(destination)
 
     end
 
     def print_destinations
-      
+      TravelLeisure::Destination.all.each.with_index(1) do |destination, index|
+        puts "#{index}. #{destination.city}, #{destination.country}"
+      end
     end
 
     # def get_destinations
