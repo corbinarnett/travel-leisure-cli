@@ -1,14 +1,15 @@
 class TravelLeisure::Destination
   @@all = []
-  attr_accessor :name
+  attr_accessor :city, :country
 
-  def initialize(name)
-    @name = name
+  def initialize(city, country)
+    @city = city
+    @country = country
     save
   end
 
   def self.all
-    TravelLeisure::Scraper.scrape_destinations if @@all.empty?
+    TravelLeisure::Scraper.create_destinations if @@all.empty?
     @@all
   end
 
