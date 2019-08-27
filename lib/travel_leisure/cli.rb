@@ -9,14 +9,13 @@ class TravelLeisure::CLI #:: name space
     end
 
     def get_destinations
-      #to be scraped instead  
-      @destinations = ["Amsterdam, Netherlands", "Bali, Thailand", "Austin, Texas"] #@destinations is an instance variable
+      @destinations = TravelLeisure::Destination.all
     end
       
     def list_destinations_with_index
       puts "\nPlease select a destination to get more info:"
       @destinations.each.with_index(1) do |item, index|
-        puts "#{index}. #{item}"
+        puts "#{index}. #{item.name}"
       end
     end
 
@@ -30,7 +29,7 @@ class TravelLeisure::CLI #:: name space
     end
 
     def more_info_for(chosen_destination)
-      destination = @months[chosen_destination - 1]
+      destination = @destinations[chosen_destination - 1]
       puts "Here is more info for #{destination}:"
       ##To implement
       # TravelLeisure::Destination.all.each.with_index(1) do | destination |
