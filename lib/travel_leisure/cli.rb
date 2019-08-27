@@ -15,7 +15,8 @@ class TravelLeisure::CLI #:: name space
     def list_destinations_with_index
       puts "\nPlease select a destination to get more info:"
       @destinations.each.with_index(1) do |item, index|
-        puts "#{index}. #{item.name}"
+        puts "#{index}. #{item}"
+        # binding.pry
       end
     end
 
