@@ -9,7 +9,7 @@ class TravelLeisure::Scraper
 
   def make_destinations
     scrape_destinations.each do |r|
-      TravelLeisure::Destination.self.new_from_index_page(r)
+      TravelLeisure::Destination.new_from_destination_page(r)
     end
   end
 end

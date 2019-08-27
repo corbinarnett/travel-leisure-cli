@@ -2,11 +2,11 @@ class TravelLeisure::Destination
   @@all = []
   attr_accessor :city, :country, :url
 
-  def self.new_from_index_page(r)
+  def self.new_from_destination_page(r)
     self.new(
       r.css("span.grid__item__title").text,
       r.css("span.grid__item__cat").text,
-      r.css("a").attribute("href").text
+      r.css("a").attribute("href")
       )
   end
 
@@ -14,14 +14,18 @@ class TravelLeisure::Destination
     @city = city
     @country = country
     @url = url
-    save
+    @@all << self
   end
 
   def self.all
     @@all
+    binding.pry
   end
 
-  def save
-    @@all << self
+  def doc
+    @doc ||= Nokogiri::HTML(open(self.url))
   end
+
+
+
 end
