@@ -2,20 +2,21 @@
 class TravelLeisure::CLI #:: name space
     def call
       puts "Welcome to Command Line Travel Guides!"
-      #list_destinations
+      get_destinations
+      list_destinations_with_index
       # get_user_destination
       #display_destination_info(user_input)
     end
+
+    def get_destinations
+      #to be scraped instead  
+      @destinations = ["Amsterdam, Netherlands", "Bali, Thailand", "Austin, Texas"] #@destinations is an instance variable
+    end
       
     def list_destinations_with_index
-      #to be scraped instead
-      @destinations = ["Amsterdam, Netherlands", "Bali, Thailand", "Austin, Texas"] #@destinations is an instance variable
-      
-      @destinations.each_with_index do |item, index|
+      @destinations.each.with_index(1) do |item, index|
         puts "#{index}. #{item}"
       end
-      
-      
     end
 
 end
