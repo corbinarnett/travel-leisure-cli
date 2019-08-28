@@ -19,7 +19,7 @@ class TravelLeisure::Destination
 
   def self.all
     @@all
-    # binding.pry
+    binding.pry
   end
 
   def save
