@@ -7,7 +7,7 @@ class TravelLeisure::Destination
       r.css("span.grid__item__title").text,
       r.css("span.grid__item__cat").text,
       "https://www.travelandleisure.com/travel-guide/#{r.css("span.grid__item__title").text.downcase}"
-      )
+    )
   end
 
   def initialize(city=nil,country=nil,url=nil)

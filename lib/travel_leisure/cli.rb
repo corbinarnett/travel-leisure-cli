@@ -16,14 +16,19 @@ class TravelLeisure::CLI #:: name space
     end
 
     def menu
+
         puts "To view the destinations that we have travel guides for, enter 'travel'.".yellow.bold
         puts "or enter 'q' to exit".yellow.bold
+
         input = gets.strip.downcase
+
         if input == 'travel'
           puts ""
-        puts "Here is a list of destinations that we have travel guides for:".yellow.bold
-        puts ""
-        print_destinations
+          puts "Here is a list of destinations that we have travel guides for:".yellow.bold
+          puts ""
+
+          print_destinations
+          
         elsif input == "q"
           exit
         else
@@ -32,11 +37,6 @@ class TravelLeisure::CLI #:: name space
           puts ""
           menu
         end
-        # puts ""
-        # puts "Here is a list of destinations that we have travel guides for:"
-        # puts ""
-        # print_destinations
-
 
         puts "\nPlease enter the number of the travel guide you would like to access\nor enter 'q' to exit:".yellow.bold
         input = gets.strip
