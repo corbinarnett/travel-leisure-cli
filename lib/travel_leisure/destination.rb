@@ -1,6 +1,6 @@
 class TravelLeisure::Destination
   @@all = []
-  attr_accessor :city, :country, :url
+  attr_accessor :city, :country, :url, :best_time_to_visit, :transportation, :weather, :know_before_visiting, :language, :currency
 
   def self.new_from_destination_page(r)
     self.new(
@@ -14,7 +14,7 @@ class TravelLeisure::Destination
     @city = city
     @country = country
     @url = url
-    @@all << self
+    save
   end
 
   def self.all
@@ -22,14 +22,43 @@ class TravelLeisure::Destination
     # binding.pry
   end
 
-  def self.find(id)
-    self.all[id-1]
+  def save
+    @@all << self
+  end
+
+  def self.find(index)
+    self.all[index-1]
   end
 
   def doc
     @doc ||= Nokogiri::HTML(open(self.url))
   end
 
+  def best_time_to_visit
+    @best_time_to_visit ||= doc.css("div.article-tips__item")[0].css("p.article-tips__content").text
+  end
+
+  def transportation
+    @transportation ||= doc.css("div.article-tips__item")[1].css("p.article-tips__content").text
+    
+  end
+
+  def weather
+    #need to gsub
+    @weather ||= doc.css("div.article-tips__item")[2].css("p.article-tips__content").text
+  end
+
+  def know_before_visiting
+    @know_before_visiting ||= doc.css("div.article-tips__item")[3].css("p.article-tips__content").text.strip
+  end
+
+  def language
+    @language ||= doc.css("div.article-tips__item")[4].css("p.article-tips__content").text.strip
+  end
+
+  def currency
+    @currency ||= doc.css("div.article-tips__item")[6].css("p.article-tips__content").text.split[0]
+  end
 
 
 end

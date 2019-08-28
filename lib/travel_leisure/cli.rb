@@ -3,14 +3,14 @@ class TravelLeisure::CLI #:: name space
     def call
       TravelLeisure::Scraper.new.make_destinations
       puts "\nWelcome to Command Line Travel Guides!"
-      start
+      menu
       # get_destinations
       # list_destinations_with_index
       # get_user_destination
       #display_destination_info(user_input)
     end
 
-    def start
+    def menu
       puts ""
       print_destinations
 
@@ -27,6 +27,7 @@ class TravelLeisure::CLI #:: name space
     end
 
     def print_destination(destination)
+
 
     end
 
