@@ -1,6 +1,6 @@
 # TravelLeisure
 
-This Ruby Gem provides a CLI to access travel guides sourced from (https://www.travelandleisure.com/travel-guide "Travel & Leisure").
+This Ruby Gem provides a CLI to access travel guides sourced from [Travel & Leisure](https://www.travelandleisure.com/travel-guide).
 
 ## Installation
 
