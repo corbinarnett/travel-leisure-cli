@@ -6,7 +6,8 @@ class TravelLeisure::Destination
     self.new(
       r.css("span.grid__item__title").text,
       r.css("span.grid__item__cat").text,
-      "https://www.travelandleisure.com/travel-guide/#{r.css("span.grid__item__title").text.downcase}"
+      r.css("a").attribute("href")
+      # "https://www.travelandleisure.com/travel-guide/#{r.css("span.grid__item__title").text.downcase}"
     )
   end
 
@@ -40,7 +41,6 @@ class TravelLeisure::Destination
 
   def transportation
     @transportation ||= doc.css("div.article-tips__item")[1].css("p.article-tips__content").text
-    
   end
 
   def weather

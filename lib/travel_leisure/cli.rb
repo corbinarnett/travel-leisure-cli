@@ -28,7 +28,7 @@ class TravelLeisure::CLI #:: name space
           puts ""
 
           print_destinations
-          
+
         elsif input == "q"
           exit
         else
@@ -47,9 +47,6 @@ class TravelLeisure::CLI #:: name space
           print_destination(destination)
         
         end
-        # destination = TravelLeisure::Destination.find(input.to_i)
-
-        # print_destination(destination)
       
         puts ""
         puts "Would you like to see another travel guide? Enter Y or N".yellow.bold
