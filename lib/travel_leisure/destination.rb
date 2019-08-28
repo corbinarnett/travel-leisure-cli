@@ -1,8 +1,8 @@
 class TravelLeisure::Destination
   @@all = []
-  attr_accessor :city, :country, :url, :best_time_to_visit, :transportation, :weather, :know_before_visiting, :language, :currency
+  attr_accessor :city, :country, :url, :best_time_to_visit, :transportation, :weather, :know_before_visiting, :language, :currency, :description
 
-  def self.new_from_destination_page(r)
+  def self.new_from_website(r)
     self.new(
       r.css("span.grid__item__title").text,
       r.css("span.grid__item__cat").text,
@@ -57,7 +57,11 @@ class TravelLeisure::Destination
   end
 
   def currency
-    @currency ||= doc.css("div.article-tips__item")[6].css("p.article-tips__content").text.split[0]
+    @currency ||= doc.css("div.article-tips__item")[6].css("p.article-tips__content").text
+  end
+
+  def description
+    @description ||= doc.css("div.destination-page-header__copy--full p").text
   end
 
 

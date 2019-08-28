@@ -4,31 +4,62 @@ class TravelLeisure::CLI #:: name space
       TravelLeisure::Scraper.new.make_destinations
       puts "\nWelcome to Command Line Travel Guides!"
       menu
-      # get_destinations
-      # list_destinations_with_index
-      # get_user_destination
-      #display_destination_info(user_input)
     end
 
     def menu
+      input = ""
+      while input != "exit"
       puts ""
       print_destinations
-
-      puts "\nWhich travel guide would you like to see?"
-
+      puts "\nPlease enter the number of the travel guide you would like to access:"
       input = gets.strip.to_i
 
       destination = TravelLeisure::Destination.find(input)
 
       print_destination(destination)
-  
       
-  
+      puts ""
+      puts "Would you like to see another travel guide? Enter Y or N"
+
+      input = gets.strip.downcase
+      if input == "y"
+        menu
+      elsif input == "n"
+        puts ""
+        puts "Thank you! Have a great day!"
+        exit
+      else
+        puts ""
+        puts "I don't understand that answer."
+        menu
+      end
+      
+      end
     end
 
     def print_destination(destination)
+      puts ""
+      puts "----------- #{destination.city}, #{destination.country} -----------"
+      puts ""
+      puts "Best Time To Visit: #{destination.best_time_to_visit}"
+      puts "\nTransportation: #{destination.transportation}"
+      puts "\nWeather: #{destination.weather}"
+      puts "\nKnow Before Visiting: #{destination.know_before_visiting}"
+      puts "\nLanguage: #{destination.language}"
+      puts "\nCurrency: #{destination.currency}"
+      puts ""
+      puts "Would you like to read more on #{destination.city}? Enter Y or N"
 
-
+        input = gets.strip.downcase
+        if input == "y"
+          puts destination.description
+        elsif input == "n"
+          menu
+        else
+          puts ""
+          puts "I don't understand that answer."
+          menu
+        end
     end
 
     def print_destinations
@@ -36,36 +67,4 @@ class TravelLeisure::CLI #:: name space
         puts "#{index}. #{destination.city}, #{destination.country}"
       end
     end
-
-    # def get_destinations
-    #   TravelLeisure::Destination.all
-    # end
-      
-    # def list_destinations_with_index
-    #   puts "\nPlease select a destination to get more info:"
-    #   get_destination.each.with_index(1) do |item, index|
-    #     puts "#{index}. #{item}"
-    #     # binding.pry
-    #   end
-    # end
-
-    # def get_user_destination
-    #   chosen_destination = gets.strip.to_i
-    #   more_info_for(chosen_destination) if valid_input(chosen_destination, @destinations)
-    # end
-
-    # def valid_input(input, data)
-    #   input.to_i <= data.length && input.to_i > 0
-    # end
-
-    # def more_info_for(chosen_destination)
-    #   destination = @destinations[chosen_destination - 1]
-    #   puts "Here is more info for #{destination}:"
-    #   ##To implement
-    #   # TravelLeisure::Destination.all.each.with_index(1) do | destination |
-    #   #   puts destination.name
-    #   # end
-    #   # get_user_destination
-    # end
-
 end
