@@ -27,7 +27,7 @@ class TravelLeisure::CLI #:: name space
           puts "Here is a list of destinations that we have travel guides for:".yellow.bold
           puts ""
 
-          print_destinations
+          list_destinations
 
         elsif input == "q"
           exit
@@ -95,7 +95,7 @@ class TravelLeisure::CLI #:: name space
         end
     end
 
-    def print_destinations
+    def list_destinations
       TravelLeisure::Destination.all.each.with_index(1) do |destination, index|
         puts "#{index}. #{destination.city}, #{destination.country}"
       end

@@ -7,7 +7,6 @@ class TravelLeisure::Destination
       r.css("span.grid__item__title").text,
       r.css("span.grid__item__cat").text,
       r.css("a").attribute("href")
-      # "https://www.travelandleisure.com/travel-guide/#{r.css("span.grid__item__title").text.downcase}"
     )
   end
 
@@ -20,7 +19,6 @@ class TravelLeisure::Destination
 
   def self.all
     @@all
-    # binding.pry
   end
 
   def save
@@ -44,7 +42,6 @@ class TravelLeisure::Destination
   end
 
   def weather
-    #need to gsub
     @weather ||= doc.css("div.article-tips__item")[2].css("p.article-tips__content").text
   end
 
