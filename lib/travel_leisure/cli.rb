@@ -1,67 +1,58 @@
 # code handling CLI display logic and user input
-class TravelLeisure::CLI #:: name space
-    def call
-      TravelLeisure::Scraper.new.make_destinations
-      puts ""
-      puts ""
-      puts " ------------------------------------------------ ".blue
-      puts "|                                                |".blue
-      puts "|    Welcome to Command Line Travel Guides       |".blue.bold
-      puts "|                                                |".blue
-      puts " ------------------------------------------------ ".blue
-      puts ""
-      puts ""
+class TravelLeisure::CLI
 
+    def start
+      greeting
+      TravelLeisure::Scraper.new.make_destinations
       menu
     end
 
-    def menu
+    def greeting
+      puts "\nWelcome to Command Line Travel Guides!".blue.bold
+      puts "Would you like to see our list of destinations?".yellow
+      puts "If so, please type 'Yes' or 'Y'!".yellow
+    end
 
-        puts "To view the destinations that we have travel guides for, enter 'travel'.".yellow.bold
-        puts "or enter 'q' to exit".yellow.bold
+    def good_bye
+      puts "Thank you for checking out Command Line Travel Guides!".yellow.bold
+      exit!
+    end
 
+    def menu 
         input = gets.strip.downcase
-
-        if input == 'travel'
-          puts ""
-          puts "Here is a list of destinations that we have travel guides for:".yellow.bold
-          puts ""
-
-          list_destinations
-
-        elsif input == "q"
-          exit
+        if input == "yes" || input == "y"
+          menu_helper
+        elsif input == "exit" || input == "e"
+          good_bye         
         else
-          puts ""
-          puts "I don't understand that answer, please try again:".red.bold
-          puts ""
-          menu
+          puts "Sorry! I didn't understand that input, please try again".red.bold
+          puts "Would you like to see our list?".yellow
+          puts "If so, please type 'Yes' or 'Y' or exit.".yellow
+          menu 
         end
+    end
 
-        puts "\nPlease enter the number of the travel guide you would like to access\nor enter 'q' to exit:".yellow.bold
+    def menu_helper
+      list_destinations
+      select_destination
+    end
+
+    def list_destinations
+      TravelLeisure::Destination.all.each.with_index(1) do |destination, index|
+            puts "#{index}. #{destination.city}, #{destination.country}"
+    end
+
+    def select_destination
+      puts "\nPlease enter the number of the travel guide you would like to access:".yellow.bold
         input = gets.strip
-        if input == 'q'
-          exit
-        elsif
-          destination = TravelLeisure::Destination.find(input.to_i)
+        destination = TravelLeisure::Destination.find(input.to_i)
+        if input == "exit" || input == "e"
+          good_bye
+        elsif input.to_i.between?(1,TravelLeisure::Destination.all.length)
           print_destination(destination)
-        
-        end
-      
-        puts ""
-        puts "Would you like to see another travel guide? Enter Y or N".yellow.bold
-
-        input = gets.strip.downcase
-        if input == "y"
-          menu
-        elsif input == "n"
-          puts ""
-          puts "Thank you! Have a great day!".yellow.bold
-          exit
         else
-          puts ""
-          puts "I don't understand that answer.".red.bold
-          menu
+          puts "Sorry! I didn't understand that input, please try again".red.bold
+          select_destination
         end
     end
 
@@ -75,29 +66,40 @@ class TravelLeisure::CLI #:: name space
       puts "\nKnow Before Visiting: #{destination.know_before_visiting}".green.bold
       puts "\nLanguage: #{destination.language}".green.bold
       puts "\nCurrency: #{destination.currency}".green.bold
-      puts ""
-      puts "Would you like to read more on #{destination.city}? Enter Y or N".yellow.bold
-
+      puts "\nWould you like to read more on #{destination.city}? Please enter 'Y' or 'N'".yellow.bold
         input = gets.strip.downcase
-        if input == "y"
+        case input
+        when 'y' || 'yes'
           puts ""
-          puts "More info:"
+          puts "More info:".yellow
           puts ""
           puts destination.description
-        elsif input == "n"
-          menu
-        elsif input == "q"
-          exit
+          alt_menu
+        when 'n' || 'no'
+          alt_menu
+        when 'exit'
+          good_bye
         else
           puts ""
-          puts "I don't understand that answer."
-          menu
+          puts "Sorry, I didn't understand that input.".red.bold
+          alt_menu
         end
     end
 
-    def list_destinations
-      TravelLeisure::Destination.all.each.with_index(1) do |destination, index|
-        puts "#{index}. #{destination.city}, #{destination.country}"
+    def alt_menu
+      puts "\nWould you like to see another travel guide? Type 'Yes' or 'Y' ".yellow.bold
+      puts "\nWould you like to exit? Type 'E' or 'Exit' ".yellow.bold
+      input = gets.strip.downcase
+      if input == 'yes' || input == 'y'
+        menu_helper
+      elsif input == 'exit' || input == 'e'
+        good_bye
+      else
+        puts "Sorry, I didn't understand that input.".red.bold
+        alt_menu
       end
     end
+
+    
+  end
 end
