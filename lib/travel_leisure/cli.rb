@@ -1,9 +1,8 @@
-# code handling CLI display logic and user input
 class TravelLeisure::CLI
 
     def start
       greeting
-      TravelLeisure::Scraper.new.make_destinations
+      TravelLeisure::Destination.load
       menu
     end
 
@@ -40,6 +39,7 @@ class TravelLeisure::CLI
     def list_destinations
       TravelLeisure::Destination.all.each.with_index(1) do |destination, index|
             puts "#{index}. #{destination.city}, #{destination.country}"
+      end
     end
 
     def select_destination
@@ -101,5 +101,5 @@ class TravelLeisure::CLI
     end
 
     
-  end
+  
 end

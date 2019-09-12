@@ -2,19 +2,21 @@ class TravelLeisure::Destination
   @@all = []
   attr_accessor :city, :country, :url, :best_time_to_visit, :transportation, :weather, :know_before_visiting, :language, :currency, :description
 
-  def self.new_from_website(r)
-    self.new(
-      r.css("span.grid__item__title").text,
-      r.css("span.grid__item__cat").text,
-      r.css("a").attribute("href")
-    )
+  def initialize(destination_hash)
+    @city = destination_hash[:city]
+    @country = destination_hash[:country]
+    @url = destination_hash[:url]
+    save
   end
 
-  def initialize(city=nil,country=nil,url=nil)
-    @city = city
-    @country = country
-    @url = url
-    save
+  def self.make_from_collection(collection)
+    collection.each do |destination_hash|
+      self.new(destination_hash)
+    end
+  end
+
+  def self.load
+    self.make_from_collection(TravelLeisure::Scraper.scrape_destinations)
   end
 
   def self.all
